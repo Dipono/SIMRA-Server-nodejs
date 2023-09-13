@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2023 at 07:27 PM
+-- Generation Time: Sep 07, 2023 at 05:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,17 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hydrogensulfide`
+--
+
+CREATE TABLE `hydrogensulfide` (
+  `id` int(11) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  `samplingId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `samplingdata`
 --
 
 CREATE TABLE `samplingdata` (
   `samplingId` int(11) NOT NULL,
   `samplingData` date DEFAULT NULL,
-  `waterSource` varchar(200) DEFAULT NULL,
   `sanitationalFacility` varchar(200) DEFAULT NULL,
   `microbial` varchar(200) DEFAULT NULL,
   `hydrological` varchar(200) DEFAULT NULL,
-  `userId` int(11) DEFAULT NULL
+  `userId` int(11) DEFAULT NULL,
+  `weatherCondition` varchar(100) DEFAULT NULL,
+  `samplingPoint` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -78,9 +91,30 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`userId`, `mobileNo`, `password`, `firstname`, `lastname`, `level`) VALUES
 (1, '0123456789', '123zxc', 'Gift', 'Mukwevho', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `watersource`
+--
+
+CREATE TABLE `watersource` (
+  `id` int(11) NOT NULL,
+  `source` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `waterAccessability` varchar(255) DEFAULT NULL,
+  `samplingId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `hydrogensulfide`
+--
+ALTER TABLE `hydrogensulfide`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `samplingId` (`samplingId`);
 
 --
 -- Indexes for table `samplingdata`
@@ -103,8 +137,21 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`userId`);
 
 --
+-- Indexes for table `watersource`
+--
+ALTER TABLE `watersource`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `samplingId` (`samplingId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `hydrogensulfide`
+--
+ALTER TABLE `hydrogensulfide`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `samplingdata`
@@ -125,8 +172,20 @@ ALTER TABLE `user`
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `watersource`
+--
+ALTER TABLE `watersource`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `hydrogensulfide`
+--
+ALTER TABLE `hydrogensulfide`
+  ADD CONSTRAINT `hydrogensulfide_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
 
 --
 -- Constraints for table `samplingdata`
@@ -139,6 +198,12 @@ ALTER TABLE `samplingdata`
 --
 ALTER TABLE `sanitaryinpectionquestion`
   ADD CONSTRAINT `sam_san` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
+
+--
+-- Constraints for table `watersource`
+--
+ALTER TABLE `watersource`
+  ADD CONSTRAINT `watersource_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
