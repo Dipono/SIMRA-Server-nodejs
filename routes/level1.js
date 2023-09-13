@@ -48,7 +48,7 @@ router.post("/hydrogensulfide", (req, res) => {
     connection.query(h2sSql, h2sBody, (error, rows) => {
         console.log("hydrogensulfide", rows)
     })
-})
+}) 
 
 router.post('/sanitary_inspection_survey', (req, res) => {
     var sql = ``

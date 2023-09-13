@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2023 at 12:20 PM
+-- Generation Time: Sep 13, 2023 at 02:52 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,13 @@ CREATE TABLE `coordinate` (
   `samplingId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `coordinate`
+--
+
+INSERT INTO `coordinate` (`coorniadteId`, `longitude`, `latitude`, `samplingId`) VALUES
+(1, '-101.101041', '-102.25255', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +50,25 @@ CREATE TABLE `coordinate` (
 CREATE TABLE `hydrogensulfide` (
   `id` int(11) NOT NULL,
   `status` varchar(100) DEFAULT NULL,
+  `samplingId` int(11) DEFAULT NULL,
+  `risk_type` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hydrogensulfide`
+--
+
+INSERT INTO `hydrogensulfide` (`id`, `status`, `samplingId`, `risk_type`) VALUES
+(1, '0', 3, 'No risk');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `microbial`
+--
+
+CREATE TABLE `microbial` (
+  `microbialId` int(11) NOT NULL,
   `samplingId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -54,13 +80,22 @@ CREATE TABLE `hydrogensulfide` (
 
 CREATE TABLE `samplingdata` (
   `samplingId` int(11) NOT NULL,
-  `samplingData` date DEFAULT NULL,
   `sanitationalFacility` varchar(200) DEFAULT NULL,
-  `microbial` varchar(200) DEFAULT NULL,
   `hydrological` varchar(200) DEFAULT NULL,
   `userId` int(11) DEFAULT NULL,
-  `weatherCondition` varchar(100) DEFAULT NULL
+  `weatherCondition` varchar(100) DEFAULT NULL,
+  `sampling_date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `samplingdata`
+--
+
+INSERT INTO `samplingdata` (`samplingId`, `sanitationalFacility`, `hydrological`, `userId`, `weatherCondition`, `sampling_date_created`) VALUES
+(1, NULL, NULL, 1, 'Dry', '2023-09-13 00:00:00'),
+(2, NULL, NULL, 1, 'sunny', '2023-09-13 11:18:06'),
+(3, NULL, NULL, 1, 'sunny', '2023-09-13 13:18:28'),
+(4, NULL, NULL, 1, 'sunny', '2023-09-13 13:52:29');
 
 -- --------------------------------------------------------
 
@@ -118,6 +153,13 @@ CREATE TABLE `watersource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `watersource`
+--
+
+INSERT INTO `watersource` (`id`, `source`, `type`, `waterAccessability`, `samplingId`) VALUES
+(1, NULL, 'River', 'hard', 3);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -133,6 +175,13 @@ ALTER TABLE `coordinate`
 --
 ALTER TABLE `hydrogensulfide`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `samplingId` (`samplingId`);
+
+--
+-- Indexes for table `microbial`
+--
+ALTER TABLE `microbial`
+  ADD PRIMARY KEY (`microbialId`),
   ADD KEY `samplingId` (`samplingId`);
 
 --
@@ -170,19 +219,25 @@ ALTER TABLE `watersource`
 -- AUTO_INCREMENT for table `coordinate`
 --
 ALTER TABLE `coordinate`
-  MODIFY `coorniadteId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `coorniadteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hydrogensulfide`
 --
 ALTER TABLE `hydrogensulfide`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `microbial`
+--
+ALTER TABLE `microbial`
+  MODIFY `microbialId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `samplingdata`
 --
 ALTER TABLE `samplingdata`
-  MODIFY `samplingId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `samplingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sanitaryinpectionquestion`
@@ -200,7 +255,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `watersource`
 --
 ALTER TABLE `watersource`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -217,6 +272,12 @@ ALTER TABLE `coordinate`
 --
 ALTER TABLE `hydrogensulfide`
   ADD CONSTRAINT `hydrogensulfide_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
+
+--
+-- Constraints for table `microbial`
+--
+ALTER TABLE `microbial`
+  ADD CONSTRAINT `microbial_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
 
 --
 -- Constraints for table `samplingdata`
