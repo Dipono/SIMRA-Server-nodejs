@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2023 at 05:02 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Sep 13, 2023 at 12:20 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `simra_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coordinate`
+--
+
+CREATE TABLE `coordinate` (
+  `coorniadteId` int(11) NOT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
+  `samplingId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,8 +59,7 @@ CREATE TABLE `samplingdata` (
   `microbial` varchar(200) DEFAULT NULL,
   `hydrological` varchar(200) DEFAULT NULL,
   `userId` int(11) DEFAULT NULL,
-  `weatherCondition` varchar(100) DEFAULT NULL,
-  `samplingPoint` varchar(200) DEFAULT NULL
+  `weatherCondition` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -110,6 +122,13 @@ CREATE TABLE `watersource` (
 --
 
 --
+-- Indexes for table `coordinate`
+--
+ALTER TABLE `coordinate`
+  ADD PRIMARY KEY (`coorniadteId`),
+  ADD KEY `samplingId` (`samplingId`);
+
+--
 -- Indexes for table `hydrogensulfide`
 --
 ALTER TABLE `hydrogensulfide`
@@ -148,6 +167,12 @@ ALTER TABLE `watersource`
 --
 
 --
+-- AUTO_INCREMENT for table `coordinate`
+--
+ALTER TABLE `coordinate`
+  MODIFY `coorniadteId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `hydrogensulfide`
 --
 ALTER TABLE `hydrogensulfide`
@@ -180,6 +205,12 @@ ALTER TABLE `watersource`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `coordinate`
+--
+ALTER TABLE `coordinate`
+  ADD CONSTRAINT `coordinate_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
 
 --
 -- Constraints for table `hydrogensulfide`
