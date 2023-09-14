@@ -60,13 +60,17 @@ router.post("/coordinates", (req, res) => {
 })
 
 router.post("/hydrogensulfide", (req, res) => {
+    var risk_type=""
+    if(req.body.status == false){risk_type = "Negative (No Risk)"}
+    else{risk_type = "positive (Risk)"}
     var h2sSql = `insert into hydrogensulfide(status,risk_type, samplingId)
             values(?,?,?);`
-    var h2sBody = [req.body.status, req.body.risk_type, req.body.samplingId]
+    var h2sBody = [req.body.status, risk_type, req.body.samplingId]
     connection.query(h2sSql, h2sBody, (err, rows) => {
         if(err) throw err
-        console.log("hydrogensulfide", rows)
-        res.send({message:"adedd hydrogensulfide", rows})
+        var status = req.body.status
+        console.log("hydrogensulfide", status,risk_type)
+        res.send({message:"adedd hydrogensulfide", status,risk_type, success:true})
     })
 })
 
