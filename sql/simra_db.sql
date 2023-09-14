@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
@@ -205,6 +205,13 @@ ALTER TABLE `microbial`
   ADD KEY `samplingId` (`samplingId`);
 
 --
+-- Indexes for table `microbial`
+--
+ALTER TABLE `microbial`
+  ADD PRIMARY KEY (`microbialId`),
+  ADD KEY `samplingId` (`samplingId`);
+
+--
 -- Indexes for table `samplingdata`
 --
 ALTER TABLE `samplingdata`
@@ -288,10 +295,22 @@ ALTER TABLE `coordinate`
   ADD CONSTRAINT `coordinate_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
 
 --
+-- Constraints for table `coordinate`
+--
+ALTER TABLE `coordinate`
+  ADD CONSTRAINT `coordinate_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
+
+--
 -- Constraints for table `hydrogensulfide`
 --
 ALTER TABLE `hydrogensulfide`
   ADD CONSTRAINT `hydrogensulfide_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
+
+--
+-- Constraints for table `microbial`
+--
+ALTER TABLE `microbial`
+  ADD CONSTRAINT `microbial_ibfk_1` FOREIGN KEY (`samplingId`) REFERENCES `samplingdata` (`samplingId`);
 
 --
 -- Constraints for table `microbial`
