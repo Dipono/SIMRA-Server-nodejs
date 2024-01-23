@@ -23,4 +23,9 @@ router.post('/login', (req,res)=>{
 })
  
 
+router.get('/logs', (req,res)=>{
+    res.send({message:'is working'})
+})
+
+
 module.exports = router
