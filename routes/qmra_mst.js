@@ -57,19 +57,19 @@ router.post('/add_indicator_qmra', (req, res) => {
     let estimated_count = req.body.estimated_count;
     let is_customized_indicator = req.body.is_customized_indicator;
 
-        if (best_fit_model.toLocaleLowerCase() == 'exponential'.toLocaleLowerCase()) {
-            totalQmra = calculateExponentialForGiardia(constant, estimated_count);
+    if (best_fit_model.toLocaleLowerCase() == 'exponential'.toLocaleLowerCase()) {
+        totalQmra = calculateExponentialForGiardia(constant, estimated_count);
+    }
+    else {
+        if (beta != null || beta != undefined) {
+            // add_indicator_qmra
+            totalQmra = calculateBetaPoisson(alpha, beta, estimated_count)
         }
         else {
-            if (beta != null || beta != undefined) {
-               // add_indicator_qmra
-                totalQmra = calculateBetaPoisson(alpha, beta, estimated_count)
-            }
-            else {
-                totalQmra = calculateEntamoebaColi(alpha, n50, estimated_count)
-            }
+            totalQmra = calculateEntamoebaColi(alpha, n50, estimated_count)
         }
-  
+    }
+
     var duration_type = req.body.duration_type;
     var likeliOfInfection = null
     var qmra_body = [pathogen, best_fit_model, alpha, beta, constant, n50, totalQmra, likeliOfInfection, duration_type, is_customize_Pathogen, samplingId]
@@ -164,14 +164,14 @@ router.post('/reference_pathogens_test', (req, res) => {
     let count = req.body.count
 
     if (best_fit_model.toLocaleLowerCase() == 'exponential'.toLocaleLowerCase()) {
-        totalQmra = calculateExponentialForGiardia(constant, estimated_count);
+        totalQmra = calculateExponentialForGiardia(constant, count);
     }
     else {
         if (beta != null || beta != undefined) {
-            totalQmra = calculateBetaPoisson(alpha, beta, estimated_count)
+            totalQmra = calculateBetaPoisson(alpha, beta, count)
         }
         else {
-            totalQmra = calculateEntamoebaColi(alpha, n50, estimated_count)
+            totalQmra = calculateEntamoebaColi(alpha, n50, count)
         }
     }
 
