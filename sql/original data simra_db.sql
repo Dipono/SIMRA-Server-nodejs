@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 05:19 PM
+-- Generation Time: Feb 14, 2024 at 07:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,6 +34,44 @@ CREATE TABLE `coordinate` (
   `samplingId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `coordinate`
+--
+
+INSERT INTO `coordinate` (`coorniadteId`, `longitude`, `latitude`, `samplingId`) VALUES
+(207, '30.480175', '-22.999264', 225),
+(208, '30.480175', '-22.999264', 226),
+(209, '30.480175', '-22.999264', 227),
+(210, '30.480175', '-22.999264', 228),
+(211, '30.697738', '-22.816052', 229),
+(212, '30.697738', '-22.816052', 230),
+(213, '30.697738', '-22.816052', 231),
+(214, '30.697738', '-22.816052', 232),
+(215, '30.491235', '-22.929802', 233),
+(216, '30.491235', '-22.929802', 234),
+(217, '30.491235', '-22.929802', 235),
+(218, '30.491235', '-22.929802', 236),
+(219, '30.895632', '-22.773814', 237),
+(220, '30.895632', '-22.773814', 238),
+(221, '30.895632', '-22.773814', 239),
+(222, '30.895632', '-22.773814', 240),
+(223, '30,666244', '-22,962443', 241),
+(224, '30,666244', '-22,962443', 242),
+(225, '30,666244', '-22,962443', 243),
+(226, '30,666244', '-22,962443', 244),
+(227, '30,683317', '-22,837643', 245),
+(228, '30,683317', '-22,837643', 246),
+(229, '30,683317', '-22,837643', 247),
+(230, '30,683317', '-22,837643', 248),
+(231, '30,683317', '-22,837643', 249),
+(232, '30,683317', '-22,837643', 250),
+(233, '30,683317', '-22,837643', 251),
+(234, '30,683317', '-22,837643', 252),
+(235, '30,447212', '-22,893641', 253),
+(236, '30,447212', '-22,893641', 254),
+(237, '30,447212', '-22,893641', 255),
+(238, '30,447212', '-22,893641', 256);
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +100,44 @@ CREATE TABLE `hydrogensulfide` (
   `samplingId` int(11) DEFAULT NULL,
   `risk_type` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hydrogensulfide`
+--
+
+INSERT INTO `hydrogensulfide` (`id`, `status`, `samplingId`, `risk_type`) VALUES
+(44, '0', 225, 'No Risk'),
+(45, '0', 226, 'No Risk'),
+(46, '0', 227, 'No Risk'),
+(47, '0', 228, 'No Risk'),
+(48, '1', 229, 'Risk'),
+(49, '1', 230, 'Risk'),
+(50, '1', 231, 'Risk'),
+(51, '1', 232, 'Risk'),
+(52, '0', 233, 'No Risk'),
+(53, '0', 234, 'No Risk'),
+(54, '0', 235, 'No Risk'),
+(55, '0', 236, 'No Risk'),
+(56, '0', 237, 'No Risk'),
+(57, '0', 238, 'No Risk'),
+(58, '0', 239, 'No Risk'),
+(59, '0', 240, 'No Risk'),
+(60, '1', 241, 'Risk'),
+(61, '1', 242, 'Risk'),
+(62, '1', 243, 'Risk'),
+(63, '1', 244, 'Risk'),
+(64, '1', 245, 'Risk'),
+(65, '1', 246, 'Risk'),
+(66, '1', 247, 'Risk'),
+(67, '1', 248, 'Risk'),
+(68, '1', 249, 'Risk'),
+(69, '1', 250, 'Risk'),
+(70, '1', 251, 'Risk'),
+(71, '1', 252, 'Risk'),
+(72, '0', 253, 'No Risk'),
+(73, '0', 254, 'No Risk'),
+(74, '0', 255, 'No Risk'),
+(75, '0', 256, 'No Risk');
 
 -- --------------------------------------------------------
 
@@ -408,8 +484,48 @@ CREATE TABLE `samplingdata` (
   `userId` int(11) DEFAULT NULL,
   `weatherCondition` varchar(100) DEFAULT NULL,
   `sampling_date_created` datetime NOT NULL,
-  `muni_id` varchar(100) DEFAULT NULL
+  `muni_id` varchar(100) DEFAULT NULL,
+  `waterAccessability` varchar(50) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `samplingdata`
+--
+
+INSERT INTO `samplingdata` (`samplingId`, `userId`, `weatherCondition`, `sampling_date_created`, `muni_id`, `waterAccessability`, `type`) VALUES
+(225, 1, 'Wet', '2021-07-06 00:00:00', 'LIM343', NULL, NULL),
+(226, 1, 'Wet', '2021-06-21 00:00:00', 'LIM343', NULL, NULL),
+(227, 1, 'Wet', '2021-09-08 00:00:00', 'LIM343', NULL, NULL),
+(228, 1, 'Wet', '2021-08-23 12:08:06', 'LIM343', NULL, NULL),
+(229, 1, 'Wet', '2021-03-06 00:00:00', 'LIM343', NULL, NULL),
+(230, 1, 'Wet', '2021-06-17 00:00:00', 'LIM343', NULL, NULL),
+(231, 1, 'Wet', '2021-08-19 00:00:00', 'LIM343', NULL, NULL),
+(232, 1, 'Wet', '2021-05-08 00:00:00', 'LIM343', NULL, NULL),
+(233, 1, 'Wet', '2021-03-06 00:00:00', 'LIM343', NULL, NULL),
+(234, 1, 'Wet', '2021-08-19 00:00:00', 'LIM343', NULL, NULL),
+(235, 1, 'Wet', '2021-05-08 00:00:00', 'LIM343', NULL, NULL),
+(236, 1, 'Wet', '2021-06-17 00:00:00', 'LIM343', NULL, NULL),
+(237, 1, 'Wet', '2021-01-06 00:00:00', 'LIM345', NULL, NULL),
+(238, 1, 'Wet', '2021-08-14 00:00:00', 'LIM345', NULL, NULL),
+(239, 1, 'Wet', '2021-06-14 00:00:00', 'LIM345', NULL, NULL),
+(240, 1, 'Wet', '2021-02-08 00:00:00', 'LIM345', NULL, NULL),
+(241, 1, 'Wet', '2021-01-06 00:00:00', 'LIM345', NULL, NULL),
+(242, 1, 'Wet', '2021-06-14 00:00:00', 'LIM345', NULL, NULL),
+(243, 1, 'Wet', '2021-02-08 00:00:00', 'LIM345', NULL, NULL),
+(244, 1, 'Wet', '2021-08-16 00:00:00', 'LIM345', NULL, NULL),
+(245, 14, 'Wet', '2021-03-06 00:00:00', 'LIM343', NULL, NULL),
+(246, 14, 'Wet', '2021-06-17 00:00:00', 'LIM343', NULL, NULL),
+(247, 14, 'Wet', '2021-05-08 00:00:00', 'LIM343', NULL, NULL),
+(248, 14, 'Wet', '2021-08-19 00:00:00', 'LIM343', NULL, NULL),
+(249, 14, 'Wet', '2021-03-06 00:00:00', 'LIM343', NULL, NULL),
+(250, 14, 'Wet', '2021-06-17 00:00:00', 'LIM343', NULL, NULL),
+(251, 14, 'Wet', '2021-08-19 00:00:00', 'LIM343', NULL, NULL),
+(252, 14, 'Wet', '2021-05-08 00:00:00', 'LIM343', NULL, NULL),
+(253, 15, 'Wet', '2021-07-06 00:00:00', 'LIM343', NULL, NULL),
+(254, 15, 'Wet', '2021-06-21 00:00:00', 'LIM343', NULL, NULL),
+(255, 15, 'Wet', '2021-09-08 00:00:00', 'LIM343', NULL, NULL),
+(256, 15, 'Wet', '2021-08-23 00:00:00', 'LIM343', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -475,6 +591,44 @@ CREATE TABLE `watersource` (
   `waterAccessability` varchar(255) DEFAULT NULL,
   `samplingId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `watersource`
+--
+
+INSERT INTO `watersource` (`id`, `type`, `waterAccessability`, `samplingId`) VALUES
+(203, 'Tap', 'Hard', 225),
+(204, 'Tap', 'Hard', 226),
+(205, 'Tap', 'Hard', 227),
+(206, 'Tap', 'Hard', 228),
+(207, 'Tap', 'Easy', 229),
+(208, 'Tap', 'Easy', 230),
+(209, 'Tap', 'Easy', 231),
+(210, 'Tap', 'Easy', 232),
+(211, 'Tap', 'Easy', 233),
+(212, 'Tap', 'Easy', 234),
+(213, 'Tap', 'Easy', 235),
+(214, 'Tap', 'Easy', 236),
+(215, 'Tap', 'Easy', 237),
+(216, 'Tap', 'Easy', 238),
+(217, 'Tap', 'Easy', 239),
+(218, 'Tap', 'Easy', 240),
+(219, 'Tap', 'Easy', 241),
+(220, 'Tap', 'Easy', 242),
+(221, 'Tap', 'Easy', 243),
+(222, 'Tap', 'Easy', 244),
+(223, 'Tap', 'Easy', 245),
+(224, 'Tap', 'Easy', 246),
+(225, 'Tap', 'Easy', 247),
+(226, 'Tap', 'Easy', 248),
+(227, 'Tap', 'Easy', 249),
+(228, 'Tap', 'Easy', 250),
+(229, 'Tap', 'Easy', 251),
+(230, 'Tap', 'Easy', 252),
+(231, 'Tap', 'Easy', 253),
+(232, 'Tap', 'Easy', 254),
+(233, 'Tap', 'Easy', 255),
+(234, 'Tap', 'Easy', 256);
 
 --
 -- Indexes for dumped tables
@@ -585,7 +739,7 @@ ALTER TABLE `watersource`
 -- AUTO_INCREMENT for table `coordinate`
 --
 ALTER TABLE `coordinate`
-  MODIFY `coorniadteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `coorniadteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT for table `fib_indicator`
@@ -597,7 +751,7 @@ ALTER TABLE `fib_indicator`
 -- AUTO_INCREMENT for table `hydrogensulfide`
 --
 ALTER TABLE `hydrogensulfide`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `microbial`
@@ -633,7 +787,7 @@ ALTER TABLE `river`
 -- AUTO_INCREMENT for table `samplingdata`
 --
 ALTER TABLE `samplingdata`
-  MODIFY `samplingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
+  MODIFY `samplingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT for table `sanitaryinpectionquestion`
@@ -651,7 +805,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `watersource`
 --
 ALTER TABLE `watersource`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 
 --
 -- Constraints for dumped tables
